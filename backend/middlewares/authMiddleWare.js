@@ -1,6 +1,8 @@
 const jwt=require("jsonwebtoken")
 const check=(roles=[])=>(req,res,next)=>{
-   
+     if (!req.headers.authorization) {
+      return res.status(401).json({ message: "Authorization header missing" });
+    }
      console.log(req.headers.authorization);
     const token=req.headers.authorization.split(" ")[1]
     if(!token) return res.status(401).json({message:"you are not allow to accces"})
